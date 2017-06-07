@@ -1,9 +1,0 @@
-d:\用户目录\我的文档\visual studio 2010\Projects\DNF\WindowsApplication1\bin\Release\WindowsApplication1.exe
-d:\用户目录\我的文档\visual studio 2010\Projects\DNF\WindowsApplication1\bin\Release\WindowsApplication1.pdb
-d:\用户目录\我的文档\visual studio 2010\Projects\DNF\WindowsApplication1\bin\Release\WindowsApplication1.xml
-d:\用户目录\我的文档\visual studio 2010\Projects\DNF\WindowsApplication1\obj\x86\Release\WindowsApplication1.Form1.resources
-d:\用户目录\我的文档\visual studio 2010\Projects\DNF\WindowsApplication1\obj\x86\Release\WindowsApplication1.Resources.resources
-d:\用户目录\我的文档\visual studio 2010\Projects\DNF\WindowsApplication1\obj\x86\Release\WindowsApplication1.vbproj.GenerateResource.Cache
-d:\用户目录\我的文档\visual studio 2010\Projects\DNF\WindowsApplication1\obj\x86\Release\WindowsApplication1.exe
-d:\用户目录\我的文档\visual studio 2010\Projects\DNF\WindowsApplication1\obj\x86\Release\WindowsApplication1.xml
-d:\用户目录\我的文档\visual studio 2010\Projects\DNF\WindowsApplication1\obj\x86\Release\WindowsApplication1.pdb

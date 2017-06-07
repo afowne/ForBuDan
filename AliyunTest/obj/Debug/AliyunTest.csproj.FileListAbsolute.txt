@@ -1,5 +1,0 @@
-D:\用户目录\我的文档\Visual Studio 2010\Projects\DNF\AliyunTest\bin\AliyunTest.dll
-D:\用户目录\我的文档\Visual Studio 2010\Projects\DNF\AliyunTest\bin\AliyunTest.pdb
-D:\用户目录\我的文档\Visual Studio 2010\Projects\DNF\AliyunTest\obj\Debug\AliyunTest.csprojResolveAssemblyReference.cache
-D:\用户目录\我的文档\Visual Studio 2010\Projects\DNF\AliyunTest\obj\Debug\AliyunTest.dll
-D:\用户目录\我的文档\Visual Studio 2010\Projects\DNF\AliyunTest\obj\Debug\AliyunTest.pdb
