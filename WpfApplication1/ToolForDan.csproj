@@ -57,6 +57,9 @@
     <Reference Include="HtmlAgilityPack">
       <HintPath>C:\Users\Administrator\Desktop\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>bin\ToolForDan\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -73,7 +76,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-  	<ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
@@ -81,6 +84,7 @@
     <Compile Include="Class\GameArea.cs" />
     <Compile Include="Class\QQAccount.cs" />
     <Compile Include="Common\ConfigHelper.cs" />
+    <Compile Include="Common\JsonHelper.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Consts.cs" />
     <Compile Include="Function\GetRealTimePrice.cs" />
@@ -89,6 +93,7 @@
     <Compile Include="Common\MyHttp.cs" />
     <Compile Include="MainWindowPart2.cs" />
     <Compile Include="MainWindowPart3.cs" />
+    <Compile Include="MainWindowPart4.cs" />
     <Compile Include="Setting.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

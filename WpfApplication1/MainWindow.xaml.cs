@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Windows.Input;
 using System.Data;
+using Newtonsoft.Json;
 
 namespace ToolForDan
 {
@@ -85,5 +86,7 @@ namespace ToolForDan
         {
             comboBox1.ItemsSource = CustomSequence.GetAllCustomSequenceName(true);
         }
+
+        
     }
 }

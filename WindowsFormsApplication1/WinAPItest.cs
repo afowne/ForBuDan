@@ -30,11 +30,11 @@ namespace WindowsFormsApplication1
 
             const uint BM_CLICK = 0xF5; //鼠标点击的消息，对于各种消息的数值，大家还是得去API手册  
 
-            IntPtr hwndPhoto = FindWindow(null, "卜丹工具1号"); //查找拍照程序的句柄【任务管理器中的应用程序名称】  
+            IntPtr hwndPhoto = FindWindow(null, "巅峰批量卡iPhone新版 V1.3"); //查找拍照程序的句柄【任务管理器中的应用程序名称】  
 
             if (true)
             {
-                IntPtr hwndThree = FindWindowEx(hwndPhoto, IntPtr.Zero, null, "转格式"); //获取按钮快照的句柄  
+                IntPtr hwndThree = FindWindowEx(hwndPhoto, IntPtr.Zero, null, "开   始"); //获取按钮快照的句柄  
 
                 SetForegroundWindow(hwndPhoto);    //将UcDemo程序设为当前活动窗口  
 
