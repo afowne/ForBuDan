@@ -24,6 +24,7 @@ namespace ToolForDan
         public MainWindow()
         {
             InitializeComponent();
+            InitBW();
         }
 
         private void tabItem2_Initialized(object sender, EventArgs e)

@@ -33,7 +33,6 @@ namespace ToolForDan
             }
             catch (Exception ex)
             {
-
                 return str;
             }
             return str;

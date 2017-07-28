@@ -70,6 +70,7 @@
                 <Grid>
                     <TextBox Height="351" HorizontalAlignment="Left" Margin="30,24,0,0" Name="textBox4" VerticalAlignment="Top" Width="417" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" AcceptsReturn="True" />
                     <Button Content="解绑" Height="31" HorizontalAlignment="Left" Margin="453,24,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
+                    <Label Height="28" HorizontalAlignment="Left" Margin="453,347,0,0" Name="label1" VerticalAlignment="Top" Width="89" />
                 </Grid>
             </TabItem>
         </TabControl>
