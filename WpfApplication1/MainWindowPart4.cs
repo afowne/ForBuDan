@@ -38,7 +38,7 @@ namespace ToolForDan
             {
                 try
                 {
-                    var temp = MyHttp.GetHttpWebResponse(Consts.url2, "card=" + lstInput[i]);
+                    var temp = MyHttp.GetHttpWebResponse(Consts.url2, "srv=0&card=" + lstInput[i]);
                     Result res = JsonHelper.DeserializeJsonToObject<Result>(temp);
                     if (res.err != "1") errList += lstInput[i] + Consts.WrapSymbol;
 
