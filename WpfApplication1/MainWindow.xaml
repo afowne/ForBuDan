@@ -30,7 +30,13 @@
                     <DataGrid AutoGenerateColumns="False" Grid.Column="1" Height="auto"  MinHeight="300" HorizontalAlignment="Left" Margin="101,12,0,0" Name="dataGrid1" VerticalAlignment="Top" Width="338" DataContext="{Binding}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="区域" Width="*" Binding="{Binding qf}" FontSize="20" IsReadOnly="True" />
-                            <DataGridTextColumn Header="价格" Width="*" Binding="{Binding shj}" FontSize="20" IsReadOnly="True" />
+                            <DataGridTemplateColumn  Header="价格" Width="*" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock FontSize="20" HorizontalAlignment="Right" Text="{Binding shj}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                         <DataGrid.ColumnHeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
