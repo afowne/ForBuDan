@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Threading;
 using System.Diagnostics;
 using System.Windows.Data;
 using System.Windows.Controls;
@@ -19,23 +18,12 @@ namespace ToolForDan
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static DispatcherTimer timerRenew = null;
-
         public MainWindow()
         {
             InitializeComponent();
             InitBW();
         }
 
-        private void tabItem2_Initialized(object sender, EventArgs e)
-        {
-            if (timerRenew == null)
-            {
-                timerRenew = new DispatcherTimer();
-                timerRenew.Tick += new EventHandler(timeCycle); timerRenew.Interval = new TimeSpan(0, 0, 0, 10);
-                timerRenew.Start();
-            }
-        }
         //转换
         private void btnTransform_Click(object sender, RoutedEventArgs e)
         {
@@ -87,7 +75,5 @@ namespace ToolForDan
         {
             comboBox1.ItemsSource = CustomSequence.GetAllCustomSequenceName(true);
         }
-
-        
     }
 }

@@ -13,6 +13,7 @@ namespace ToolForDan
     public partial class MainWindow : Window
     {
         BackgroundWorker backgroundWorker1 = new BackgroundWorker();
+
         private void InitBW()
         {
             backgroundWorker1.WorkerReportsProgress = true;
@@ -63,6 +64,12 @@ namespace ToolForDan
         {
             textBox4.Text = e.Result.ToString();
             MessageBox.Show("解绑结束！");
+        }
+
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            textBox4.Text = "";
         }
 
         public class Result

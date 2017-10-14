@@ -4,17 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace ToolForDan
 {
-    public partial class MainWindow:Window
+    public partial class MainWindow : Window
     {
+        private static DispatcherTimer timerRenew = null;
+
+        private void tabItem2_Initialized(object sender, EventArgs e)
+        {
+            if (timerRenew == null)
+            {
+                timerRenew = new DispatcherTimer();
+                timerRenew.Tick += new EventHandler(timeCycle); timerRenew.Interval = new TimeSpan(0, 0, 0, 10);
+                timerRenew.Start();
+            }
+        }
+
         //手动更新
         private void button4_Click(object sender, RoutedEventArgs e)
         {
-            textBox3.Text = "";
-            textBox3.Foreground = Brushes.Blue;
-            textBox3.Text = RealTimePrice.GetPriceStr();
+            dataGrid1.ItemsSource = RealTimePrice.GetPriceTB().DefaultView;
+            dataGrid1.Foreground = Brushes.Blue;
+
             #region Parallel Obsolete
             //Timer timer = new Timer(60000);
             //timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
@@ -31,9 +45,18 @@ namespace ToolForDan
 
         public void timeCycle(object sender, EventArgs e)
         {
-            textBox3.Text = "";
-            textBox3.Foreground = Brushes.Green;
-            textBox3.Text = RealTimePrice.GetPriceStr();
+            Thread thread = new Thread(UpdateDT);
+            thread.Start();
+        }
+
+        private void UpdateDT()
+        {
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate()
+                {
+                    dataGrid1.ItemsSource = RealTimePrice.GetPriceTB().DefaultView;
+                    dataGrid1.Foreground = Brushes.Black;
+                }
+            );
         }
     }
 }

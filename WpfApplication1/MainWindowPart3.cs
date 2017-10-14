@@ -129,11 +129,11 @@ namespace ToolForDan
             string newValue = (e.EditingElement as TextBox).Text;
             if (string.IsNullOrEmpty(newValue))
             {
-                System.Windows.MessageBox.Show("不能输出入空名");
+                MessageBox.Show("不能输出入空名");
             }
             else if ((dataGrid.ItemsSource as List<CustomSequence>).Exists(p => String.Equals(p.CustomName, newValue, StringComparison.InvariantCultureIgnoreCase)))
             {
-                System.Windows.MessageBox.Show("已存在名为：" + newValue);
+                MessageBox.Show("已存在名为：" + newValue);
             }
             else
             {
