@@ -94,6 +94,7 @@
     <Compile Include="MainWindowPart2.cs" />
     <Compile Include="MainWindowPart3.cs" />
     <Compile Include="MainWindowPart4.cs" />
+    <Compile Include="MainWindowPart5.cs" />
     <Compile Include="Setting.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

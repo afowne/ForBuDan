@@ -11,7 +11,7 @@ namespace ToolForDan
         public static string url = "http://shou.1771.com/shipmentorder/init.action";
         public static string para1 = "orderDemandBean.currentNo=0&orderDemandBean.pageSize=10&selectedGameBean.gameId=G10&selectedGameBean.groupid=G10P001&selectedGameBean.serverId={0}&selectedGameBean.serverName=%E5%AE%89%E5%BE%BD2%E5%8C%BA&selectedGameBean.camp=&selectedGameBean.goodstypeid=&orderDemandBean.orderColumn=unitprice+desc&orderDemandBean.searchtype=&orderDemandBean.gameid=G10&orderDemandBean.keyvalue=";
         public static string para2 = "orderDemandBean.currentNo=0&orderDemandBean.pageSize=10&selectedGameBean.gameId=G10&selectedGameBean.groupid=G10P002&selectedGameBean.serverId={0}&selectedGameBean.serverName=%E5%AE%89%E5%BE%BD2%E5%8C%BA&selectedGameBean.camp=&selectedGameBean.goodstypeid=&orderDemandBean.orderColumn=unitprice+desc&orderDemandBean.searchtype=&orderDemandBean.gameid=G10&orderDemandBean.keyvalue=";
-        public static string url_allprice = "http://b2b.1771.com/b2bquotation.html";
+        public static string url_allprice = "http://b2b.1771.com/shouquotation.html";
 
 
         public static string url2 = "http://120.55.70.104/Unbind";
