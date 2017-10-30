@@ -12,6 +12,8 @@ namespace ToolForDan
 {
     public partial class MainWindow : Window
     {
+        const int RETRYTIMES = 3;
+
         BackgroundWorker backgroundWorker1 = new BackgroundWorker();
 
         private void InitBW()
@@ -35,29 +37,46 @@ namespace ToolForDan
         {
             List<string> lstInput = e.Argument.ToString().Split(new string[] { Consts.WrapSymbol }, StringSplitOptions.None).ToList();
             string errList = string.Empty;
+            int successCount = 0;
+            BWR bwr = new BWR();
             for (int i = 0; i < lstInput.Count; i++)
             {
                 try
                 {
-                    var temp = MyHttp.GetHttpWebResponse(Consts.url2, "srv=0&card=" + lstInput[i]);
-                    Result res = JsonHelper.DeserializeJsonToObject<Result>(temp);
-                    if (res.err != "1") errList += lstInput[i] + Consts.WrapSymbol;
-
-                    Thread.Sleep(100);
-                    backgroundWorker1.ReportProgress(i + 1);
+                    for (int j = 0; j < RETRYTIMES; j++)
+                    {
+                        var temp = MyHttp.GetHttpWebResponse(Consts.url2, "srv=0&card=" + lstInput[i]);
+                        Result res = JsonHelper.DeserializeJsonToObject<Result>(temp);
+                        bwr.th1 = (i + 1).ToString();
+                        bwr.th2 = (j + 1).ToString();
+                        if (res.err == "1")
+                        {
+                            bwr.th3 = (successCount++).ToString();
+                            Thread.Sleep(100);
+                            backgroundWorker1.ReportProgress(i + 1, bwr);
+                            break;
+                        }
+                        else
+                        {
+                            bwr.th3 = successCount.ToString();
+                            Thread.Sleep(100);
+                            backgroundWorker1.ReportProgress(i + 1, bwr);
+                            if ((j + 1) == RETRYTIMES) errList += lstInput[i] + Consts.WrapSymbol;
+                        }
+                    }
                 }
                 catch (Exception)
                 {
                     continue;
                 }
             }
-
             e.Result = errList;
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            label1.Content = "解至第" + e.ProgressPercentage + "个！";
+            BWR bwr = (BWR)e.UserState;
+            label1.Content = "正在解绑第" + bwr.th1 + "个（请求第" + bwr.th2 + "次）" + Consts.WrapSymbol + "已成功" + bwr.th3 + "个。";
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -76,6 +95,16 @@ namespace ToolForDan
         {
             public string err { set; get; }
             public string msg { set; get; }
+        }
+
+        public class BWR
+        {
+            //第几个
+            public string th1 { set; get; }
+            //第几次
+            public string th2 { set; get; }
+            //成功几个
+            public string th3 { set; get; }
         }
     }
 }
