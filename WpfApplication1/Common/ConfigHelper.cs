@@ -34,18 +34,25 @@ namespace ToolForDan
             config.Save(ConfigurationSaveMode.Modified);
         }
 
-        public void Remove(string strkey, string value)
+        public void Remove(string strkey, string value, bool RemoveAllValue = false)
         {
-            if (config.AppSettings.Settings[strkey] != null)
+            if (RemoveAllValue)
             {
-                if (config.AppSettings.Settings[strkey].Value.IndexOf(',') > 0)
+                config.AppSettings.Settings[strkey].Value = "";
+            }
+            else
+            {
+                if (config.AppSettings.Settings[strkey] != null)
                 {
-                    config.AppSettings.Settings[strkey].Value = config.AppSettings.Settings[strkey].Value.Replace("," + value, string.Empty);
-                    config.AppSettings.Settings[strkey].Value = config.AppSettings.Settings[strkey].Value.Replace(value + ",", string.Empty);
-                }
-                else
-                {
-                    config.AppSettings.Settings[strkey].Value = config.AppSettings.Settings[strkey].Value.Replace(value, string.Empty);
+                    if (config.AppSettings.Settings[strkey].Value.IndexOf(',') > 0)
+                    {
+                        config.AppSettings.Settings[strkey].Value = config.AppSettings.Settings[strkey].Value.Replace("," + value, string.Empty);
+                        config.AppSettings.Settings[strkey].Value = config.AppSettings.Settings[strkey].Value.Replace(value + ",", string.Empty);
+                    }
+                    else
+                    {
+                        config.AppSettings.Settings[strkey].Value = config.AppSettings.Settings[strkey].Value.Replace(value, string.Empty);
+                    }
                 }
             }
             config.Save(ConfigurationSaveMode.Modified);

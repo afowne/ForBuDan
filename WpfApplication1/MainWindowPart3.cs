@@ -5,11 +5,28 @@ using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace ToolForDan
 {
     public partial class MainWindow : Window
     {
+        private void tabItem3_Initialized(object sender, EventArgs e)
+        {
+            var cfgHelper = new ConfigHelper();
+            var temp = GameArea.GetSelectedGameAreas();
+            if (temp.Count > 0)
+            {
+                Consts.LstServer.Except(temp).ToList().ForEach(p => listBox1.Items.Add(p));
+                temp.ForEach(p => listBox2.Items.Add(p));
+            }
+            else
+            {
+                Consts.LstServer.ForEach(p => listBox1.Items.Add(p));
+            }
+            Reload();
+        }
+
         private void btnReboot_Click(object sender, RoutedEventArgs e)
         {
             #region Obsolete
@@ -72,6 +89,77 @@ namespace ToolForDan
             Reload();
         }
 
+        private void listBox3_Drop(object sender, DragEventArgs e)
+        {
+            var pos = e.GetPosition(listBox3);
+            var result = VisualTreeHelper.HitTest(listBox3, pos);
+            if (result == null)
+            {
+                return;
+            }
+            //查找元数据  
+            var sourcePerson = e.Data.GetData(typeof(GameArea)) as GameArea;
+            if (sourcePerson == null)
+            {
+                return;
+            }
+            //查找目标数据  
+            var listBoxItem = FindVisualParent<ListBoxItem>(result.VisualHit);
+            if (listBoxItem == null)
+            {
+                listBox3.Items.Remove(sourcePerson);
+                listBox3.Items.Insert(listBox3.Items.Count, sourcePerson);
+                return;
+            }
+            var targetPerson = listBoxItem.Content as GameArea;
+            if (ReferenceEquals(targetPerson, sourcePerson))
+            {
+                return;
+            }
+            listBox3.Items.Remove(sourcePerson);
+            listBox3.Items.Insert(listBox3.Items.IndexOf(targetPerson), sourcePerson);
+
+            var l = listBox3.Items.Cast<GameArea>();// as IList<GameArea>;
+            if (true)
+            {
+                var t = new CustomSequence((dataGrid.SelectedItem as CustomSequence).CustomName);
+                t.RemoveSequence("", true);
+                t.AddSequence(string.Join(",",l.Select(p=>p.Code).ToList()));
+            }
+        }
+
+        public static T FindVisualParent<T>(DependencyObject obj) where T : class
+        {
+            while (obj != null)
+            {
+                if (obj is T)
+                    return obj as T;
+
+                obj = VisualTreeHelper.GetParent(obj);
+            }
+            return null;
+        }
+
+        private void listBox3_PreviewMouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                var pos = e.GetPosition(listBox3);
+                HitTestResult result = VisualTreeHelper.HitTest(listBox3, pos);
+                if (result == null)
+                {
+                    return;
+                }
+                var listBoxItem = FindVisualParent<ListBoxItem>(result.VisualHit);
+                if (listBoxItem == null || listBoxItem.Content != listBox3.SelectedItem)
+                {
+                    return;
+                }
+                DataObject dataObj = new DataObject(listBoxItem.Content as GameArea);
+                DragDrop.DoDragDrop(listBox3, dataObj, DragDropEffects.Move);
+            }
+        }
+
         private void dataGrid_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             //if (e.Key == Key.Enter)
@@ -119,7 +207,15 @@ namespace ToolForDan
                 currentCustomSequence.LoadAllSequence();
                 if (currentCustomSequence.LstCodeSequence.Count > 0)
                 {
-                    currentCustomSequence.LstCodeSequence.ForEach(p => listBox3.Items.Add(p));
+                    int innerID = 0;
+                    currentCustomSequence.LstCodeSequence.ForEach(p => {
+                        var t = new GameArea();
+                        t.ID=innerID;
+                        t.Code=p.Code;
+                        t.Name=p.Name;
+                        listBox3.Items.Add(t);
+                        innerID++;
+                    });
                 }
             }
         }

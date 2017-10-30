@@ -74,10 +74,10 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button Content="删除编号" Height="33" HorizontalAlignment="Left" Margin="231,274,0,0" Name="btnRemoveCustomSequence" VerticalAlignment="Top" Width="75" Click="btnRemoveCustomSequence_Click" />
-                    <ListBox x:Name="listBox3" BorderThickness="0" ItemsSource="{Binding}" Margin="590,14,0,0" FontSize="12" HorizontalAlignment="Left" Width="150" Height="235" VerticalAlignment="Top">
+                    <ListBox x:Name="listBox3" BorderThickness="0" ItemsSource="{Binding}" Margin="590,14,0,0" FontSize="22" HorizontalAlignment="Left" Width="150" Height="382" VerticalAlignment="Top" AllowDrop="True" Drop="listBox3_Drop" PreviewMouseMove="listBox3_PreviewMouseMove">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock  Text="{Binding Name}"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>

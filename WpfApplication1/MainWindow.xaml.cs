@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Media;
 using System.Diagnostics;
 using System.Windows.Data;
 using System.Windows.Controls;
@@ -53,22 +52,6 @@ namespace ToolForDan
         {
             textBox1.Text = "";
             textBox2.Text = "";
-        }
-
-        private void tabItem3_Initialized(object sender, EventArgs e)
-        {
-            var cfgHelper = new ConfigHelper();
-            var temp = GameArea.GetSelectedGameAreas();
-            if (temp.Count > 0)
-            {
-                Consts.LstServer.Except(temp).ToList().ForEach(p => listBox1.Items.Add(p));
-                temp.ForEach(p => listBox2.Items.Add(p));
-            }
-            else
-            {
-                Consts.LstServer.ForEach(p => listBox1.Items.Add(p));
-            }
-            Reload();
         }
 
         private void tabItem1_Initialized(object sender, EventArgs e)

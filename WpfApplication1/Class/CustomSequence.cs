@@ -55,9 +55,14 @@ namespace ToolForDan
             cfh.Add(CustomName, value);
         }
 
-        public void RemoveSequence(string value)
+        public void RemoveSequence(string value, bool RemoveAllValue = false)
         {
-            cfh.Remove(CustomName, value);
+            cfh.Remove(CustomName, value, RemoveAllValue);
+        }
+
+        public void DeleteSequence()
+        {
+            cfh.Delete(CustomName);
         }
 
         public void LoadAllSequence()
