@@ -35,7 +35,7 @@ namespace ToolForDan
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            List<string> lstInput = e.Argument.ToString().Split(new string[] { Consts.WrapSymbol }, StringSplitOptions.None).ToList();
+            List<string> lstInput = e.Argument.ToString().Trim().Split(new string[] { Consts.WrapSymbol }, StringSplitOptions.None).ToList();
             string errList = string.Empty;
             int successCount = 0;
             BWR bwr = new BWR();
@@ -51,7 +51,8 @@ namespace ToolForDan
                         bwr.th2 = (j + 1).ToString();
                         if (res.err == "1")
                         {
-                            bwr.th3 = (successCount++).ToString();
+                            successCount++;
+                            bwr.th3 = successCount.ToString();
                             Thread.Sleep(100);
                             backgroundWorker1.ReportProgress(i + 1, bwr);
                             break;

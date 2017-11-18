@@ -34,6 +34,74 @@ namespace ToolForDan
             textBox5.Text = cfh.GetValue(SplitRowCountKey);
         }
 
+
+        private void textBox3_PreviewDragOver(object sender, DragEventArgs e)
+        {
+            e.Effects = DragDropEffects.Copy;
+            e.Handled = true;
+        }
+
+        private void textBox3_PreviewDrop(object sender, DragEventArgs e)
+        {
+            string path = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+            textBox3.Text = path;
+            this.textBox3.Cursor = Cursors.IBeam; //还原鼠标形状  
+        }
+
+        private void button5_Click(object sender, RoutedEventArgs e)
+        {
+            string file = textBox3.Text.Trim();
+            #region 检查
+            if (string.IsNullOrEmpty(file))
+            {
+                MessageBox.Show("路径不能为空！");
+                return;
+            }
+            #endregion
+
+            try
+            {
+                var Splited0 = File.ReadAllLines(file, Encoding.Default).ToList();
+                //过滤空白行
+                var delblank = Splited0.Where(p => !string.IsNullOrEmpty(p.Trim())).ToList();
+                //获取重复行
+                var repeat = delblank.GroupBy(p => p).Where(g => g.Count() > 2).ToList();
+                //DISTINCT
+                var value = (from p in delblank select p).Distinct().ToList();
+                //输出信息
+                textBox8.Text = string.Format("文件【{0}】共有【{1}】行" + Consts.WrapSymbol + "其中空白【{2}】行" + Consts.WrapSymbol + "重复【{3}】行" + Consts.WrapSymbol + "重复的行有【{4}】"
+                    , file
+                    , Splited0.Count
+                    , Splited0.Count-delblank.Count
+                    , repeat.Count
+                    , string.Join("|", repeat.Select(p=>p.Key).ToList()));
+                #region 重写文件
+                FileStream fs = new FileStream(file, FileMode.Create);
+                StreamWriter sw = new StreamWriter(fs);
+                for (int i = 0; i < value.Count; i++)
+                {
+                    sw.Write(value[i]);
+                    if (i != value.Count - 1)
+                    {
+                        sw.WriteLine();
+                    }
+                } 
+                #endregion
+                sw.Flush();
+                sw.Close();
+                fs.Close();
+            }
+            catch (Exception eo)
+            {
+                MessageBox.Show(eo.Message);
+            }
+            finally
+            {
+                cfh.Delete(SourceFilePathKey);
+                cfh.Add(SourceFilePathKey, textBox3.Text.Trim());
+            }
+        }
+
         private void button3_Click(object sender, RoutedEventArgs e)
         {
             string file = textBox3.Text.Trim();
@@ -123,10 +191,6 @@ namespace ToolForDan
                 cfh.Add(SourceFilePathKey, textBox3.Text.Trim());
                 cfh.Delete(SplitRowCountKey);
                 cfh.Add(SplitRowCountKey, textBox5.Text.Trim());
-            }
-            catch (FileNotFoundException ef)
-            {
-                MessageBox.Show(ef.Message);
             }
             catch (Exception eo)
             {

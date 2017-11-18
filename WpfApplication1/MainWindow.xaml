@@ -96,7 +96,7 @@
             <TabItem Header="切割文本" Name="tabItem5" FontSize="16" Initialized="tabItem5_Initialized">
                 <Grid>
                     <Label Content="源文件路径：" Height="34" HorizontalAlignment="Left" Margin="25,20,0,0" Name="label2" VerticalAlignment="Top" Width="108" />
-                    <TextBox Height="32" HorizontalAlignment="Left" Margin="143,21,0,0" Name="textBox3" VerticalAlignment="Top" Width="562" />
+                    <TextBox Height="32" HorizontalAlignment="Left" Margin="143,21,0,0" Name="textBox3" VerticalAlignment="Top" Width="562" PreviewDragOver="textBox3_PreviewDragOver" PreviewDrop="textBox3_PreviewDrop" />
                     <Label Content="截取行数：" Height="34" HorizontalAlignment="Left" Margin="41,60,0,0" Name="label3" VerticalAlignment="Top" Width="92" />
                     <TextBox Height="32" HorizontalAlignment="Left" Margin="143,60,0,0" Name="textBox5" VerticalAlignment="Top" Width="562" />
                     <Label Content="保留截取：" Height="34" HorizontalAlignment="Left" Margin="41,100,0,0" Name="label4" VerticalAlignment="Top" Width="92" />
@@ -107,7 +107,8 @@
                     <RadioButton Content="自定义" Height="29" HorizontalAlignment="Right" Margin="0,143,329,0" Name="radioButton2" VerticalAlignment="Top" GroupName="NewName" />
                     <TextBox Height="32" HorizontalAlignment="Right" Margin="0,140,429,0" Name="textBox6" VerticalAlignment="Top" Width="82" HorizontalContentAlignment="Right" Text="1" />
                     <TextBox Height="32" HorizontalAlignment="Left" Margin="438,140,0,0" Name="textBox7" VerticalAlignment="Top" Width="267" />
-                    <TextBox Height="164" HorizontalAlignment="Left" Margin="177,262,0,0" Name="textBox8" VerticalAlignment="Top" Width="367" IsReadOnly="True" />
+                    <TextBox Height="164" HorizontalAlignment="Left" Margin="25,262,0,0" Name="textBox8" VerticalAlignment="Top" Width="680" IsReadOnly="True" TextWrapping="Wrap" HorizontalScrollBarVisibility="Visible" IsEnabled="True" VerticalScrollBarVisibility="Visible" />
+                    <Button Content="删除重复行" Height="56" HorizontalAlignment="Left" Margin="25,191,0,0" Name="button5" VerticalAlignment="Top" Width="144" Click="button5_Click" />
                 </Grid>
             </TabItem>
         </TabControl>
