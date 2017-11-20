@@ -14,7 +14,7 @@ namespace ToolForDan
         public static string url_allprice = "http://b2b.1771.com/shouquotation.html";
 
 
-        public static string url2 = "http://47.96.192.74/card";
+        public static string url2 = "http://120.55.70.104/card";
 
         public static List<GameArea> LstServer = new List<GameArea>() 
         {

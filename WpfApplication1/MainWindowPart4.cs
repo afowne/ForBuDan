@@ -19,6 +19,7 @@ namespace ToolForDan
         private void InitBW()
         {
             backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
             backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker1_DoWork);
             backgroundWorker1.ProgressChanged += new ProgressChangedEventHandler(backgroundWorker1_ProgressChanged);
             backgroundWorker1.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker1_RunWorkerCompleted);
@@ -45,6 +46,11 @@ namespace ToolForDan
                 {
                     for (int j = 0; j < RETRYTIMES; j++)
                     {
+                        if (backgroundWorker1.CancellationPending)
+                        {
+                            e.Cancel = true;
+                            return;
+                        }
                         var temp = MyHttp.GetHttpWebResponse(Consts.url2, "srv=0&card=" + lstInput[i]);
                         Result res = JsonHelper.DeserializeJsonToObject<Result>(temp);
                         bwr.th1 = (i + 1).ToString();
@@ -82,10 +88,21 @@ namespace ToolForDan
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            textBox4.Text = e.Result.ToString();
-            MessageBox.Show("解绑结束！");
+            if (e.Cancelled)
+            {
+                MessageBox.Show("解绑停止！");
+            }
+            else
+            {
+                textBox4.Text = e.Result.ToString();
+                MessageBox.Show("解绑结束！");
+            }
         }
 
+        private void button6_Click(object sender, RoutedEventArgs e)
+        {
+            backgroundWorker1.CancelAsync();
+        }
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
