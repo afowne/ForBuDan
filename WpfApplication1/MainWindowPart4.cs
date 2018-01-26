@@ -12,12 +12,16 @@ namespace ToolForDan
 {
     public partial class MainWindow : Window
     {
+        private string AjaxUnbindUrlKey = "AjaxUnbindUrl";
+        private string AjaxUnbindServerKey = "AjaxUnbindServer";
         const int RETRYTIMES = 3;
 
         BackgroundWorker backgroundWorker1 = new BackgroundWorker();
 
         private void InitBW()
         {
+            textBox9.Text = cfh.GetValue(AjaxUnbindUrlKey);
+            comboBox2.SelectedIndex = int.Parse(string.IsNullOrEmpty(cfh.GetValue(AjaxUnbindServerKey)) ? "0" : cfh.GetValue(AjaxUnbindServerKey));
             backgroundWorker1.WorkerReportsProgress = true;
             backgroundWorker1.WorkerSupportsCancellation = true;
             backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker1_DoWork);
@@ -31,16 +35,22 @@ namespace ToolForDan
             {
                 return;
             }
-            backgroundWorker1.RunWorkerAsync(textBox4.Text);
+            cfh.Delete(AjaxUnbindUrlKey);
+            cfh.Add(AjaxUnbindUrlKey, textBox9.Text.Trim());
+            cfh.Delete(AjaxUnbindServerKey);
+            cfh.Add(AjaxUnbindServerKey, comboBox2.SelectionBoxItem.ToString());
+
+            backgroundWorker1.RunWorkerAsync(new { a = textBox4.Text, b = textBox9.Text, c = comboBox2.SelectionBoxItem.ToString() });
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            List<string> lstInput = e.Argument.ToString().Trim().Split(new string[] { Consts.WrapSymbol }, StringSplitOptions.None).ToList();
+            dynamic z = e.Argument;
+            var lstInput = z.a.ToString().Trim().Split(new string[] { Consts.WrapSymbol }, StringSplitOptions.None);
             string errList = string.Empty;
             int successCount = 0;
             BWR bwr = new BWR();
-            for (int i = 0; i < lstInput.Count; i++)
+            for (int i = 0; i < lstInput.Length; i++)
             {
                 try
                 {
@@ -51,7 +61,7 @@ namespace ToolForDan
                             e.Cancel = true;
                             return;
                         }
-                        var temp = MyHttp.GetHttpWebResponse(Consts.url2, "srv=0&card=" + lstInput[i]);
+                        var temp = MyHttp.GetHttpWebResponse(z.b.ToString(), "srv=" + z.c.ToString() + "&card=" + lstInput[i]);
                         Result res = JsonHelper.DeserializeJsonToObject<Result>(temp);
                         bwr.th1 = (i + 1).ToString();
                         bwr.th2 = (j + 1).ToString();

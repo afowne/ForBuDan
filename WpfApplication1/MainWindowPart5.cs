@@ -13,8 +13,6 @@ namespace ToolForDan
 {
     public partial class MainWindow : Window
     {
-        BackgroundWorker backgroundWorker222 = new BackgroundWorker();
-
         private static ConfigHelper cfh = new ConfigHelper();
 
         private string SourceFilePathKey = "SourceFilePath";
@@ -72,9 +70,9 @@ namespace ToolForDan
                 textBox8.Text = string.Format("文件【{0}】共有【{1}】行" + Consts.WrapSymbol + "其中空白【{2}】行" + Consts.WrapSymbol + "重复【{3}】行" + Consts.WrapSymbol + "重复的行有【{4}】"
                     , file
                     , Splited0.Count
-                    , Splited0.Count-delblank.Count
+                    , Splited0.Count - delblank.Count
                     , repeat.Count
-                    , string.Join("|", repeat.Select(p=>p.Key).ToList()));
+                    , string.Join("|", repeat.Select(p => p.Key).ToList()));
                 #region 重写文件
                 FileStream fs = new FileStream(file, FileMode.Create);
                 StreamWriter sw = new StreamWriter(fs);
