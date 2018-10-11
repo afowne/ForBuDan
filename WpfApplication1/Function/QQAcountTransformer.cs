@@ -39,13 +39,14 @@ namespace ToolForDan
             lstWaiting.ForEach((p) =>
             {
                 int turn = 1;
+                strRe.Append("[账号]" + Consts.WrapSymbol);
                 temp.ForEach((x) =>
                 {
                     strRe.Append(turn.ToString() + "=" + p.ID + "|" + p.PW + "|" + x + "|1|2" + Consts.WrapSymbol);
                     turn++;
                 });
             });
-            return "[账号]" + Consts.WrapSymbol + strRe.ToString();
+            return strRe.ToString();
         }
     }
 }
