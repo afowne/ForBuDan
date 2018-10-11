@@ -38,12 +38,14 @@ namespace ToolForDan
             var temp = forOrder.Select(q => q.Name).ToList();
             lstWaiting.ForEach((p) =>
             {
+                int turn = 1;
                 temp.ForEach((x) =>
                 {
-                    strRe.AppendFormat("{0}{1}{2}{3}{4}{5}", p.ID, Separator2, p.PW, Separator3, x, Consts.WrapSymbol);
+                    strRe.Append(turn.ToString() + "=" + p.ID + "|" + p.PW + "|" + x + "|1|2" + Consts.WrapSymbol);
+                    turn++;
                 });
             });
-            return strRe.ToString();
+            return "[账号]" + Consts.WrapSymbol + strRe.ToString();
         }
     }
 }
