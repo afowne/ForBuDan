@@ -162,7 +162,7 @@ namespace ToolForDan
                 #region 写新文件
                 //File.WriteAllLines(filepath + "\\" + NewFileName, Splited, Encoding.Default);
                 FileStream fs = new FileStream(filepath + "\\" + NewFileName, FileMode.Create);
-                StreamWriter sw = new StreamWriter(fs,Encoding.ASCII);
+                StreamWriter sw = new StreamWriter(fs,Encoding.UTF8);
                 for (int i = 0; i < Splited0.Length; i++)
                 {
                     sw.Write(Splited0[i]);
